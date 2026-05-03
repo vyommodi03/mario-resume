@@ -168,16 +168,18 @@ canvas {
 /* Wooden Signpost Theme for Description */
 .mario-signpost {
     max-width: 650px;
-    background: #8b4513; /* Saddlebrown */
-    background-image: 
+    background: #8b4513;
+    /* Saddlebrown */
+    background-image:
         linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
     background-size: 100% 10px, 10px 100%;
-    border: 8px solid #5d2906; /* Darker brown */
+    border: 8px solid #5d2906;
+    /* Darker brown */
     padding: 25px 40px;
     margin-bottom: 35px;
     position: relative;
-    box-shadow: 
+    box-shadow:
         10px 10px 0px rgba(0, 0, 0, 0.3),
         inset 4px 4px 0px rgba(255, 255, 255, 0.1);
     z-index: 10;
@@ -193,15 +195,31 @@ canvas {
     box-shadow: inset 2px 2px 0px rgba(255, 255, 255, 0.2);
 }
 
-.sign-nail.top-left { top: 10px; left: 10px; }
-.sign-nail.top-right { top: 10px; right: 10px; }
-.sign-nail.bottom-left { bottom: 10px; left: 10px; }
-.sign-nail.bottom-right { bottom: 10px; right: 10px; }
+.sign-nail.top-left {
+    top: 10px;
+    left: 10px;
+}
+
+.sign-nail.top-right {
+    top: 10px;
+    right: 10px;
+}
+
+.sign-nail.bottom-left {
+    bottom: 10px;
+    left: 10px;
+}
+
+.sign-nail.bottom-right {
+    bottom: 10px;
+    right: 10px;
+}
 
 .mario-signpost p {
     font-family: 'VT323', monospace;
     font-size: 1.6rem;
-    color: #ffd700; /* Gold text on wood */
+    color: #ffd700;
+    /* Gold text on wood */
     text-align: center;
     line-height: 1.3;
     text-shadow: 2px 2px 0px #000;
@@ -210,7 +228,8 @@ canvas {
 
 /* Premium Gold Box for Coin Count */
 .premium-gold-box {
-    background: #f8d828; /* Mario Yellow */
+    background: #f8d828;
+    /* Mario Yellow */
     border: 6px solid #000;
     padding: 15px 30px;
     display: flex;
@@ -231,8 +250,9 @@ canvas {
 .coin-display .coin-icon {
     width: 24px;
     height: 24px;
-    background: #fff; /* We'll use a better coin icon later or simple CSS */
-    background: url('/assets/sprites/coin.png') no-repeat center;
+    background: #fff;
+    /* We'll use a better coin icon later or simple CSS */
+    background: url('assets/sprites/coin.png') no-repeat center;
     background-size: contain;
     animation: coin-spin-ui 0.8s steps(4) infinite;
 }
@@ -242,7 +262,8 @@ canvas {
     font-size: 14px;
     color: #000;
     letter-spacing: 1px;
-    margin-right: 20px; /* Space between label and number */
+    margin-right: 20px;
+    /* Space between label and number */
 }
 
 #final-score-value {
@@ -261,24 +282,35 @@ canvas {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(255, 255, 255, 0.4),
-        transparent
-    );
+    background: linear-gradient(120deg,
+            transparent,
+            rgba(255, 255, 255, 0.4),
+            transparent);
     animation: shine-sweep 3s infinite;
 }
 
 @keyframes shine-sweep {
-    0% { left: -100%; }
-    20% { left: 100%; }
-    100% { left: 100%; }
+    0% {
+        left: -100%;
+    }
+
+    20% {
+        left: 100%;
+    }
+
+    100% {
+        left: 100%;
+    }
 }
 
 @keyframes coin-spin-ui {
-    from { transform: rotateY(0deg); }
-    to { transform: rotateY(360deg); }
+    from {
+        transform: rotateY(0deg);
+    }
+
+    to {
+        transform: rotateY(360deg);
+    }
 }
 
 .game-over-body {
@@ -298,8 +330,15 @@ canvas {
 }
 
 @keyframes arcade-pulse {
-    from { transform: scale(1); filter: brightness(1); }
-    to { transform: scale(1.05); filter: brightness(1.3); }
+    from {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+
+    to {
+        transform: scale(1.05);
+        filter: brightness(1.3);
+    }
 }
 
 @keyframes dropIn {
@@ -403,7 +442,8 @@ canvas {
 .title-screen-container {
     width: 100%;
     height: 100%;
-    background-color: #5c94fc; /* Classic Mario Sky Blue */
+    background-color: #5c94fc;
+    /* Classic Mario Sky Blue */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -423,13 +463,32 @@ canvas {
     opacity: 0.8;
 }
 
-.cloud-1 { top: 15%; left: 10%; animation: floatCloud 20s linear infinite; }
-.cloud-2 { top: 25%; right: 15%; animation: floatCloud 25s linear infinite reverse; }
-.cloud-3 { top: 10%; right: 40%; animation: floatCloud 30s linear infinite; }
+.cloud-1 {
+    top: 15%;
+    left: 10%;
+    animation: floatCloud 20s linear infinite;
+}
+
+.cloud-2 {
+    top: 25%;
+    right: 15%;
+    animation: floatCloud 25s linear infinite reverse;
+}
+
+.cloud-3 {
+    top: 10%;
+    right: 40%;
+    animation: floatCloud 30s linear infinite;
+}
 
 @keyframes floatCloud {
-    from { transform: translateX(-100px); }
-    to { transform: translateX(100px); }
+    from {
+        transform: translateX(-100px);
+    }
+
+    to {
+        transform: translateX(100px);
+    }
 }
 
 /* Ground */
@@ -449,12 +508,13 @@ canvas {
     font-size: 3.5rem;
     line-height: 1.5;
     text-align: center;
-    text-shadow: 
+    text-shadow:
         6px 6px 0px #000,
         -2px -2px 0px #000,
         2px -2px 0px #000,
         -2px 2px 0px #000;
-    margin-bottom: 20px; /* Reduced to fit subtitle */
+    margin-bottom: 20px;
+    /* Reduced to fit subtitle */
     z-index: 10;
 }
 
@@ -471,25 +531,73 @@ canvas {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 0.9; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 0.9;
+    }
 }
 
-.mario-logo span { display: inline-block; animation: bounceLogo 0.5s ease-in-out infinite alternate; }
+.mario-logo span {
+    display: inline-block;
+    animation: bounceLogo 0.5s ease-in-out infinite alternate;
+}
 
-.mario-logo .m { color: #e52521; animation-delay: 0.0s; }
-.mario-logo .a { color: #f8d828; animation-delay: 0.1s; }
-.mario-logo .r { color: #43b047; animation-delay: 0.2s; }
-.mario-logo .i { color: #0055ff; animation-delay: 0.3s; }
-.mario-logo .o { color: #f8d828; animation-delay: 0.4s; }
-.mario-logo .u { color: #e52521; animation-delay: 0.5s; }
-.mario-logo .n { color: #43b047; animation-delay: 0.6s; }
-.mario-logo .e { color: #0055ff; animation-delay: 0.7s; }
-.mario-logo .y { color: #f8d828; animation-delay: 0.8s; }
+.mario-logo .m {
+    color: #e52521;
+    animation-delay: 0.0s;
+}
+
+.mario-logo .a {
+    color: #f8d828;
+    animation-delay: 0.1s;
+}
+
+.mario-logo .r {
+    color: #43b047;
+    animation-delay: 0.2s;
+}
+
+.mario-logo .i {
+    color: #0055ff;
+    animation-delay: 0.3s;
+}
+
+.mario-logo .o {
+    color: #f8d828;
+    animation-delay: 0.4s;
+}
+
+.mario-logo .u {
+    color: #e52521;
+    animation-delay: 0.5s;
+}
+
+.mario-logo .n {
+    color: #43b047;
+    animation-delay: 0.6s;
+}
+
+.mario-logo .e {
+    color: #0055ff;
+    animation-delay: 0.7s;
+}
+
+.mario-logo .y {
+    color: #f8d828;
+    animation-delay: 0.8s;
+}
 
 @keyframes bounceLogo {
-    from { transform: translateY(0); }
-    to { transform: translateY(-10px); }
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-10px);
+    }
 }
 
 /* Start Button */

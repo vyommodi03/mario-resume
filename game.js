@@ -26,8 +26,17 @@ function initGame() {
     onKeyPress(resumeAudio);
     onMousePress(resumeAudio);
 
-// Load Local Assets
-loadRoot(import.meta.env.BASE_URL);
+    // Safely handle base URL for both Vite and raw GitHub Pages deployment
+    let assetRoot = "/";
+    try {
+        if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) {
+            assetRoot = import.meta.env.BASE_URL;
+        }
+    } catch (e) {
+        // Fallback for non-Vite environments (like raw GitHub Pages source deployment)
+        assetRoot = window.location.pathname.includes("mario-resume") ? "/mario-resume/" : "/";
+    }
+    loadRoot(assetRoot);
 
 // Load Local Assets (Animated Mario Sprite Sheet - 26 Frames)
 loadSprite("bean", "assets/sprites/Mario.png", {
