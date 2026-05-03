@@ -7,6 +7,8 @@ kaboom({
 });
 
 // Load Local Assets
+loadRoot(import.meta.env.BAS3E_URL);
+
 // Load Local Assets (Animated Mario Sprite Sheet - 26 Frames)
 loadSprite("bean", "assets/sprites/Mario.png", {
     sliceX: 26,
