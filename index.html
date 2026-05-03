@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vyom Modi - Interactive Resume</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Kaboom Canvas Container -->
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+    </div>
+
+    <!-- UI Layer -->
+    <div id="ui-layer">
+        <!-- Task 3: Arcade Plaque Style Header -->
+        <div id="game-header-container" class="game-header-box">
+            <div class="corner-dot top-left"></div>
+            <div class="corner-dot top-right"></div>
+            <div class="corner-dot bottom-left"></div>
+            <div class="corner-dot bottom-right"></div>
+            <h1 class="game-title">VYOM'S JOURNEY</h1>
+        </div>
+
+        <!-- Task 2: Retro ScoreCard -->
+        <div id="score-card">
+            <div class="label">POINTS</div>
+            <div id="points-value">000000</div>
+        </div>
+
+        <!-- Info Modal Template -->
+        <div id="info-modal" class="modal hidden">
+            <div class="modal-content glass">
+                <h2 id="modal-title">Title</h2>
+                <p id="modal-body">Body content goes here.</p>
+                <button id="modal-continue-btn" class="btn primary">PRESS START TO CONTINUE</button>
+            </div>
+        </div>
+
+        <!-- Task 4: Game Over Modal -->
+        <div id="game-over-modal" class="modal hidden">
+            <div class="modal-content game-over-content">
+                <h1 class="game-over-title">GAME OVER</h1>
+                <div class="final-score-card">
+                    <div class="label">FINAL SCORE</div>
+                    <div id="final-score-value">000000</div>
+                </div>
+                <p class="restart-hint">Press SPACE to Try Again</p>
+            </div>
+        </div>
+
+        <!-- Final Resume Modal (Native HTML) -->
+        <div id="resume-modal" class="modal hidden">
+            <div class="modal-content resume-container">
+                <div class="resume-header-bar">
+                    <div class="cleared-title">COURSE CLEARED! You found the Superstar Engineer.</div>
+                    <div class="cleared-subtitle">Star Performer (2023-24) | Codeforces Expert | Master of Java,
+                        Distributed Systems & AI</div>
+                    <button id="resume-restart-btn" class="btn secondary">PRESS START TO REPLAY</button>
+                </div>
+
+                <div class="resume-document">
+                    <div class="resume-header">
+                        <h1>Vyom Modi</h1>
+                        <p>+91 9825351561 | vyommodi03@gmail.com | Gurugram, India</p>
+                    </div>
+
+                    <div class="resume-section">
+                        <h3>Experience</h3>
+                        <div class="resume-item">
+                            <div class="resume-item-header">
+                                <strong>Lead Product Engineer (Voice & CCaaS)</strong>
+                                <span>Sprinklr | June 2025 – Present</span>
+                            </div>
+                            <ul>
+                                <li>Reduced end-to-end VoiceBot latency by 81% (from 8 seconds to 1.5 seconds) by
+                                    integrating streaming ASR, SSML-optimized LLMs, and TTS architectures.</li>
+                                <li>Accelerated real-time Voice AI Agent interactions to sub-600ms latency by
+                                    architecting provider-agnostic Agentic AI pipelines with RAG.</li>
+                                <li>Scaled CCaaS recording orchestration to process millions of daily calls with zero
+                                    audio loss.</li>
+                                <li>Ensured 99.9% uptime across high-performance distributed real-time-speech systems.
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="resume-item">
+                            <div class="resume-item-header">
+                                <strong>Senior Product Engineer (Voice & CPaaS)</strong>
+                                <span>Sprinklr | June 2024 – May 2025</span>
+                            </div>
+                            <ul>
+                                <li>Accelerated partner onboarding by 2 engineering hours per integration by leading the
+                                    architectural migration to WebSocket-based streaming.</li>
+                                <li>Improved core CCaaS platform resilience by decoupling non-critical
+                                    Elasticsearch/MongoDB dependencies via Kafka-based event processing.</li>
+                                <li>Decreased Mean Time To Detect by 30% by developing a custom FreeSWITCH (ESL) event
+                                    tracking system.</li>
+                            </ul>
+                        </div>
+                        <div class="resume-item">
+                            <div class="resume-item-header">
+                                <strong>Product Engineer (Real-Time Speech)</strong>
+                                <span>Sprinklr | July 2022 – May 2024</span>
+                            </div>
+                            <ul>
+                                <li>Slashed cloud storage costs by 50% by engineering an automated PCMU WAV to MP3
+                                    transcoding pipeline.</li>
+                                <li>Reduced Redis memory footprint by 50% while maintaining sub-millisecond access for
+                                    transcription services.</li>
+                                <li>Decreased high-severity database alerts by 90% by fine-tuning MongoDB indexing and
+                                    query execution.</li>
+                                <li>Saved 40% on node infrastructure costs via dynamic CronJob-based scaling for
+                                    Kubernetes pods.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="resume-section">
+                        <h3>Technical Skills</h3>
+                        <ul>
+                            <li><strong>Languages:</strong> Java (Expert), C++, Python, Go, JavaScript, SQL</li>
+                            <li><strong>Distributed Systems:</strong> Kafka, Microservices, Kubernetes, Docker, High
+                                Availability, Load Balancing, WebRTC</li>
+                            <li><strong>Databases & Storage:</strong> MongoDB, Elasticsearch, Redis, PostgreSQL,
+                                ScyllaDB, AWS S3</li>
+                            <li><strong>AI & ML:</strong> Agentic Workflows, LLM Orchestration, ASR/TTS Streaming,
+                                Gen-AI Integration</li>
+                        </ul>
+                    </div>
+
+                    <div class="resume-section">
+                        <h3>Key Projects</h3>
+                        <div class="resume-item">
+                            <div class="resume-item-header">
+                                <strong>Git Blame Test Pipeline</strong>
+                                <span>Java, MongoDB, AWS S3, Slack API</span>
+                            </div>
+                            <ul>
+                                <li>Developed an automated accountability tool that improved team-wide debugging
+                                    efficiency by 30%.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="resume-section">
+                        <h3>Education</h3>
+                        <div class="resume-item">
+                            <div class="resume-item-header">
+                                <strong>B.Tech in Information and Communication Technology</strong>
+                                <span>DA-IICT | 2018 – 2022 (CPI: 8.83/10.00)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Start the game -->
+    <script type="module" src="game.js"></script>
+</body>
+
+</html>
