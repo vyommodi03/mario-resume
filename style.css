@@ -47,7 +47,7 @@ canvas {
     position: fixed;
     top: 20px;
     left: 50%;
-    transform: translateX(-50%) rotate(-3deg);
+    transform: translateX(-50%) rotate(-2deg);
     /* The Retro Tilt */
     z-index: 10000;
     pointer-events: none;
@@ -341,11 +341,7 @@ canvas {
     }
 }
 
-@keyframes dropIn {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 32px;
-    color: white;
-}
+
 
 .restart-hint {
     font-family: 'Press Start 2P', cursive;
