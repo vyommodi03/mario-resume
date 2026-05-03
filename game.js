@@ -331,9 +331,18 @@ function initGame() {
         const JUMP_FORCE = 1300;
         const ENEMY_SPEED = 100;
 
+        const progressMario = document.getElementById("progress-mario");
+        const levelWidth = levelMap[0].length * levelConfig.tileWidth;
+
         // Camera & Animation State Management
         player.onUpdate(() => {
             camPos(player.pos.x + 200, height() / 2);
+
+            // Update Progress Bar
+            if (progressMario) {
+                const progress = (player.pos.x / levelWidth) * 100;
+                progressMario.style.left = `${Math.min(progress, 95)}%`;
+            }
 
             // Bottomless Pit Hazard
             if (player.pos.y > height() + 200) {
