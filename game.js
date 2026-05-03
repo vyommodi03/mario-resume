@@ -8,7 +8,7 @@ kaboom({
 
 // Load Local Assets
 // Load Local Assets (Animated Mario Sprite Sheet - 26 Frames)
-loadSprite("bean", "/assets/sprites/Mario.png", {
+loadSprite("bean", "assets/sprites/Mario.png", {
     sliceX: 26,
     sliceY: 1,
     anims: {
@@ -27,29 +27,29 @@ loadSprite("bean", "/assets/sprites/Mario.png", {
 });
 
 // Load Kaboom Official Assets (Now Local)
-loadSprite("ghosty", "/assets/sprites/ghosty.png");
-loadSprite("spike", "/assets/sprites/spike.png");
-loadSprite("grass", "/assets/sprites/grass.png");
-loadSprite("steel", "/assets/sprites/note.png");
-loadSprite("brick", "/assets/sprites/grass.png");
-loadSprite("jumpy", "/assets/sprites/jumpy.png");
-loadSprite("unboxed", "/assets/sprites/mark.png");
-loadSprite("apple", "/assets/sprites/apple.png");
-loadSprite("portal", "/assets/sprites/portal.png");
-loadSprite("coin", "/assets/sprites/coin.png");
-loadSprite("cloud", "/assets/sprites/cloud.png");
-loadSprite("sun", "/assets/sprites/sun.png");
-loadSprite("butterfly", "/assets/sprites/btfly.png");
+loadSprite("ghosty", "assets/sprites/ghosty.png");
+loadSprite("spike", "assets/sprites/spike.png");
+loadSprite("grass", "assets/sprites/grass.png");
+loadSprite("steel", "assets/sprites/note.png");
+loadSprite("brick", "assets/sprites/grass.png");
+loadSprite("jumpy", "assets/sprites/jumpy.png");
+loadSprite("unboxed", "assets/sprites/mark.png");
+loadSprite("apple", "assets/sprites/apple.png");
+loadSprite("portal", "assets/sprites/portal.png");
+loadSprite("coin", "assets/sprites/coin.png");
+loadSprite("cloud", "assets/sprites/cloud.png");
+loadSprite("sun", "assets/sprites/sun.png");
+loadSprite("butterfly", "assets/sprites/btfly.png");
 
 // Load Sounds (Now Local)
-loadSound("jump", "/assets/sounds/powerup.mp3");
-loadSound("coin", "/assets/sounds/score.mp3");
-loadSound("powerup", "/assets/sounds/spring.mp3");
-loadSound("blip", "/assets/sounds/blip.mp3");
-loadSound("hit", "/assets/sounds/hit.mp3");
-loadSound("portal", "/assets/sounds/portal.mp3");
-loadSound("bgm", "/assets/sounds/OtherworldlyFoe.mp3");
-loadSound("off", "/assets/sounds/off.mp3");
+loadSound("jump", "assets/sounds/powerup.mp3");
+loadSound("coin", "assets/sounds/score.mp3");
+loadSound("powerup", "assets/sounds/spring.mp3");
+loadSound("blip", "assets/sounds/blip.mp3");
+loadSound("hit", "assets/sounds/hit.mp3");
+loadSound("portal", "assets/sounds/portal.mp3");
+loadSound("bgm", "assets/sounds/OtherworldlyFoe.mp3");
+loadSound("off", "assets/sounds/off.mp3");
 
 // Data for the Information Poles
 const poleData = {
