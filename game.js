@@ -1,13 +1,33 @@
 import kaboom from "kaboom";
 
-// Initialize Kaboom
-kaboom({
-    canvas: document.getElementById("game-canvas"),
-    background: [141, 183, 255], // Sky blue
+// Start Button Logic
+const startBtn = document.getElementById("start-btn");
+const startScreen = document.getElementById("start-screen");
+
+startBtn.addEventListener("click", () => {
+    startScreen.classList.add("hidden");
+    initGame();
 });
 
+function initGame() {
+    // Initialize Kaboom
+    kaboom({
+        canvas: document.getElementById("game-canvas"),
+        background: [141, 183, 255], // Sky blue
+    });
+
+    // Fix AudioContext autoplay policy (redundant but safe)
+    const resumeAudio = () => {
+        if (getAudioContext().state === "suspended") {
+            getAudioContext().resume();
+        }
+    };
+
+    onKeyPress(resumeAudio);
+    onMousePress(resumeAudio);
+
 // Load Local Assets
-loadRoot(import.meta.env.BAS3E_URL);
+loadRoot(import.meta.env.BASE_URL);
 
 // Load Local Assets (Animated Mario Sprite Sheet - 26 Frames)
 loadSprite("bean", "assets/sprites/Mario.png", {
@@ -620,5 +640,6 @@ scene("game", () => {
 
 });
 
-// Start the game
-go("game");
+    // Start the game
+    go("game");
+}
