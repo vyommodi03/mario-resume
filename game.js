@@ -26,17 +26,9 @@ function initGame() {
     onKeyPress(resumeAudio);
     onMousePress(resumeAudio);
 
-    // Safely handle base URL for both Vite and raw GitHub Pages deployment
-    let assetRoot = "/";
-    try {
-        if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) {
-            assetRoot = import.meta.env.BASE_URL;
-        }
-    } catch (e) {
-        // Fallback for non-Vite environments (like raw GitHub Pages source deployment)
-        assetRoot = window.location.pathname.includes("mario-resume") ? "/mario-resume/" : "/";
-    }
-    loadRoot(assetRoot);
+    // Standard relative path loading for Kaboom
+    // This works in Vite dev, Vite build, and raw GitHub Pages hosting
+    loadRoot("./");
 
 // Load Local Assets (Animated Mario Sprite Sheet - 26 Frames)
 loadSprite("bean", "assets/sprites/Mario.png", {
