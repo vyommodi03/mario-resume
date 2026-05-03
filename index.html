@@ -85,13 +85,50 @@
 
         <!-- Task 4: Game Over Modal -->
         <div id="game-over-modal" class="modal hidden">
-            <div class="modal-content game-over-content">
-                <h1 class="game-over-title">GAME OVER</h1>
-                <div class="final-score-card">
-                    <div class="label">FINAL SCORE</div>
-                    <div id="final-score-value">000000</div>
+            <div class="title-screen-container game-over-premium">
+                <!-- Decorative Clouds -->
+                <div class="cloud-dec cloud-1"></div>
+                <div class="cloud-dec cloud-2"></div>
+                <div class="cloud-dec cloud-3"></div>
+
+                <div class="logo-container">
+                    <h1 class="mario-logo" style="font-size: 2.5rem;">
+                        <span class="m">G</span><span class="a">A</span><span class="r">M</span><span class="i">E</span>
+                        <br>
+                        <span class="o">O</span><span class="u">V</span><span class="u">E</span><span class="r">R</span>
+                    </h1>
                 </div>
-                <p class="restart-hint">Press SPACE to Try Again</p>
+
+                <div class="game-over-narrative mario-signpost">
+                    <div class="sign-nail top-left"></div>
+                    <div class="sign-nail top-right"></div>
+                    <div class="sign-nail bottom-left"></div>
+                    <div class="sign-nail bottom-right"></div>
+                    <p>Mamma Mia! Vyom's adventure has only just begun! From the pipes of Sprinklr to the castles of DA-IICT, he's been collecting power-ups and clearing stages with ease. There are still many hidden secrets and professional levels to unlock. Don't give up now—press START to jump back into the odyssey!</p>
+                </div>
+
+                <div class="game-over-body">
+                    <div class="final-score-card premium-gold-box">
+                        <div class="coin-display">
+                            <div class="coin-icon"></div>
+                            <div class="label">COINS COLLECTED</div>
+                        </div>
+                        <div id="final-score-value">000000</div>
+                        <div class="box-shine"></div>
+                    </div>
+                </div>
+
+                <div class="game-over-actions">
+                    <button id="retry-btn" class="btn-mario">
+                        <span class="coin-icon"></span>
+                        RETRY THE QUEST
+                        <span class="coin-icon"></span>
+                    </button>
+                    <p class="audio-hint">PRESS SPACE TO TRY AGAIN</p>
+                </div>
+
+                <!-- Ground at bottom -->
+                <div class="title-ground"></div>
             </div>
         </div>
 

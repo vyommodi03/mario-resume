@@ -159,44 +159,33 @@ function big() {
     };
 }
 
-scene("lose", () => {
+scene("lose", (finalScore) => {
     if (bgmMusic) {
         bgmMusic.paused = true;
     }
     play("off");
 
-    add([
-        text("GAME OVER", {
-            size: 80,
-            font: "monospace"
-        }),
-        pos(width() / 2, height() / 2 - 40),
-        anchor("center"),
-        color(255, 0, 0),
-        outline(8, rgb(255, 255, 255)),
-        scale(1),
-        "gameover-text"
-    ]);
+    const gameOverModal = document.getElementById("game-over-modal");
+    const finalScoreValue = document.getElementById("final-score-value");
+    const retryBtn = document.getElementById("retry-btn");
 
-    const pressSpace = add([
-        text("Press SPACE to Try Again", { size: 24, font: "monospace" }),
-        pos(width() / 2, height() / 2 + 80),
-        anchor("center"),
-        color(255, 255, 255),
-        outline(3, rgb(0, 0, 0)),
-    ]);
+    if (gameOverModal && finalScoreValue) {
+        finalScoreValue.innerText = `x ${finalScore}`;
+        gameOverModal.classList.remove("hidden");
+        gameOverModal.style.display = "flex";
+    }
 
-    // Blinking effect for "Press SPACE"
-    loop(0.5, () => {
-        pressSpace.hidden = !pressSpace.hidden;
-    });
+    const restartGame = () => {
+        if (gameOverModal) {
+            gameOverModal.classList.add("hidden");
+            gameOverModal.style.display = "none";
+        }
+        go("game");
+    };
 
-    // Scale up animation for GAME OVER
-    onUpdate("gameover-text", (t) => {
-        t.scale = vec2(wave(1, 1.2, time() * 5));
-    });
-
-    onKeyPress("space", () => go("game"));
+    retryBtn.addEventListener("click", restartGame, { once: true });
+    
+    onKeyPress("space", restartGame);
 });
 
 
@@ -347,7 +336,7 @@ scene("game", () => {
 
         // Bottomless Pit Hazard
         if (player.pos.y > height() + 200) {
-            go("lose");
+            go("lose", score);
         }
     });
 
@@ -534,7 +523,7 @@ scene("game", () => {
                 player.smallify();
                 player.invincify(1); // 1 second of invincibility
             } else {
-                go("lose");
+                go("lose", score);
             }
         }
     });
@@ -624,7 +613,7 @@ scene("game", () => {
     // Hazards
     player.onCollide("hazard", () => {
         if (isGamePaused) return;
-        go("lose");
+        go("lose", score);
     });
 
     // Win condition (Portal)
