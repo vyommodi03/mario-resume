@@ -1,5 +1,25 @@
 import kaboom from "kaboom";
 
+const MIN_VIEWPORT_WIDTH = 768;
+let viewportBlockedGlobal = false;
+
+function applyViewportSizing() {
+    viewportBlockedGlobal = window.innerWidth < MIN_VIEWPORT_WIDTH;
+    const overlay = document.getElementById("viewport-too-small");
+    const gc = document.getElementById("game-container");
+    if (!overlay || !gc) return;
+    if (viewportBlockedGlobal) {
+        overlay.classList.remove("hidden");
+        gc.classList.add("canvas-hidden");
+    } else {
+        overlay.classList.add("hidden");
+        gc.classList.remove("canvas-hidden");
+    }
+}
+
+window.addEventListener("resize", applyViewportSizing);
+applyViewportSizing();
+
 // Start Button Logic
 const startBtn = document.getElementById("start-btn");
 const startScreen = document.getElementById("start-screen");
@@ -10,10 +30,21 @@ startBtn.addEventListener("click", () => {
 });
 
 function initGame() {
-    // Initialize Kaboom
+    const GAME_LOGIC_WIDTH = 1920;
+    const GAME_LOGIC_HEIGHT = 1080;
+
     kaboom({
         canvas: document.getElementById("game-canvas"),
-        background: [141, 183, 255], // Sky blue
+        width: GAME_LOGIC_WIDTH,
+        height: GAME_LOGIC_HEIGHT,
+        letterbox: true,
+        background: [141, 183, 255],
+    });
+
+    let isGamePaused = false;
+
+    onUpdate(() => {
+        debug.paused = isGamePaused || viewportBlockedGlobal;
     });
 
     // Fix AudioContext autoplay policy (redundant but safe)
@@ -104,8 +135,6 @@ function initGame() {
     const resumeRestartBtn = document.getElementById("resume-restart-btn");
     const pointsValue = document.getElementById("points-value");
 
-    // UI state
-    let isGamePaused = false;
     let bgmMusic = null;
 
     // Continue Button Logic
@@ -198,7 +227,7 @@ function initGame() {
         onUpdate(() => {
             if (chance(0.01)) {
                 const startX = camPos().x + width() / 2 + 100;
-                const startY = rand(50, 300);
+                const startY = rand(height() * (50 / GAME_LOGIC_HEIGHT), height() * (300 / GAME_LOGIC_HEIGHT));
                 add([
                     sprite("cloud"),
                     pos(startX, startY),
@@ -222,7 +251,7 @@ function initGame() {
         add([
             sprite("sun"),
             color(255, 255, 0),
-            pos(width() - 80, 80),
+            pos(width() - width() * (80 / GAME_LOGIC_WIDTH), height() * (80 / GAME_LOGIC_HEIGHT)),
             anchor("center"),
             fixed(),
             scale(3),
@@ -233,7 +262,7 @@ function initGame() {
         onUpdate(() => {
             if (chance(0.02)) {
                 const startX = camPos().x + width() / 2 + 100;
-                const startY = rand(100, height() - 200);
+                const startY = rand(height() * (100 / GAME_LOGIC_HEIGHT), height() - height() * (200 / GAME_LOGIC_HEIGHT));
                 add([
                     sprite("butterfly"),
                     pos(startX, startY),
@@ -309,7 +338,7 @@ function initGame() {
         // Add Player
         const player = add([
             sprite("bean"),
-            pos(100, 300), // Adjusted start position for bottom anchor
+            pos(width() * (100 / GAME_LOGIC_WIDTH), height() * (300 / GAME_LOGIC_HEIGHT)),
             area({ scale: vec2(0.4, 1.0) }), // Full height to prevent sinking, narrow width for gaps
             body(),
             anchor("bot"), // Pivot from the feet
