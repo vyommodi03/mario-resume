@@ -149,6 +149,42 @@ canvas {
     text-align: center;
 }
 
+/* Game Controls */
+#game-controls {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    z-index: 10001;
+    display: flex;
+    gap: 15px;
+    pointer-events: auto;
+}
+
+.control-btn {
+    background: rgba(0, 0, 0, 0.7);
+    border: 4px solid white;
+    box-shadow: 4px 4px 0px black;
+    color: white;
+    font-size: 20px;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 0px black;
+}
+
+.control-btn:active {
+    transform: translateY(2px);
+    box-shadow: 2px 2px 0px black;
+}
+
 #score-card .label {
     font-size: 10px;
     margin-bottom: 5px;

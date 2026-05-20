@@ -40,17 +40,44 @@ function initGame() {
 
     const pauseModal = document.getElementById("pause-modal");
     const resumeBtn = document.getElementById("resume-game-btn");
+    const soundBtn = document.getElementById("sound-toggle-btn");
+    const pauseToggleBtn = document.getElementById("pause-toggle-btn");
+
+    let isSoundOn = true;
+
+    if (soundBtn) {
+        soundBtn.addEventListener("click", (e) => {
+            e.stopPropagation(); // prevent global click from overriding
+            isSoundOn = !isSoundOn;
+            volume(isSoundOn ? 1.0 : 0.0);
+            soundBtn.innerText = isSoundOn ? "🔊" : "🔇";
+            if (canvas) canvas.focus();
+        });
+    }
 
     const pauseGame = () => {
         isGamePaused = true;
         if (pauseModal) pauseModal.classList.remove("hidden");
+        if (pauseToggleBtn) pauseToggleBtn.innerText = "▶️";
     };
 
     const resumeGame = () => {
         isGamePaused = false;
         if (pauseModal) pauseModal.classList.add("hidden");
+        if (pauseToggleBtn) pauseToggleBtn.innerText = "⏸️";
         if (canvas) canvas.focus();
     };
+
+    if (pauseToggleBtn) {
+        pauseToggleBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if (isGamePaused) {
+                resumeGame();
+            } else {
+                pauseGame();
+            }
+        });
+    }
 
     window.addEventListener("blur", pauseGame);
     window.addEventListener("focus", resumeGame);
