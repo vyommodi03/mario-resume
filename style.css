@@ -483,7 +483,10 @@ canvas {
     justify-content: center;
     align-items: center;
     position: relative;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: clamp(10px, 3vh, 30px) 10px;
+    box-sizing: border-box;
 }
 
 /* Decorative Clouds */
@@ -547,7 +550,7 @@ canvas {
         -2px -2px 0px #000,
         2px -2px 0px #000,
         -2px 2px 0px #000;
-    margin-bottom: 20px;
+    margin-bottom: clamp(10px, 2vw, 20px);
     /* Reduced to fit subtitle */
     z-index: 10;
 }
@@ -557,7 +560,7 @@ canvas {
     font-size: clamp(0.5rem, 2vw, 0.8rem);
     color: #fff;
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: clamp(15px, 4vh, 50px);
     letter-spacing: 2px;
     text-shadow: 2px 2px 0px #000;
     opacity: 0.9;
@@ -720,6 +723,8 @@ canvas {
     box-shadow: 15px 15px 0px rgba(0, 0, 0, 0.4);
     padding: clamp(15px, 5vw, 40px);
     max-width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
     width: 90%;
     color: white;
     text-align: center;
