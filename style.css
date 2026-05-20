@@ -1035,3 +1035,71 @@ canvas {
 .btn.secondary:hover {
     background: #ffdd00;
 }
+
+/* Mobile Touch Controls */
+#mobile-controls {
+    display: none;
+}
+
+@media (pointer: coarse) and (max-width: 1024px) {
+    #mobile-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        z-index: 10001;
+        pointer-events: none;
+    }
+
+    .dpad {
+        display: flex;
+        gap: 10px;
+        pointer-events: auto;
+    }
+
+    .action-buttons {
+        pointer-events: auto;
+    }
+
+    .touch-btn {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        color: white;
+        font-size: 24px;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .touch-btn:active {
+        background: rgba(255, 255, 255, 0.4);
+        transform: scale(0.95);
+    }
+
+    .action-btn {
+        width: 70px;
+        height: 70px;
+        background: rgba(229, 37, 33, 0.3);
+        border: 2px solid rgba(229, 37, 33, 0.6);
+        font-family: 'Press Start 2P', cursive;
+        font-size: 20px;
+    }
+
+    .action-btn:active {
+        background: rgba(229, 37, 33, 0.6);
+    }
+}

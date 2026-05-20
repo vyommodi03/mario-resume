@@ -432,6 +432,80 @@ function initGame() {
                 go("lose", score);
             }
         });
+        // Mobile Touch State
+        let isTouchLeft = false;
+        let isTouchRight = false;
+        let isTouchDown = false;
+
+        const btnLeft = document.getElementById("btn-left");
+        const btnRight = document.getElementById("btn-right");
+        const btnDown = document.getElementById("btn-down");
+        const btnJump = document.getElementById("btn-jump");
+
+        const bindTouch = (btn, setState) => {
+            if (!btn) return;
+            btn.addEventListener("touchstart", (e) => { e.preventDefault(); setState(true); });
+            btn.addEventListener("touchend", (e) => { e.preventDefault(); setState(false); });
+            btn.addEventListener("touchcancel", (e) => { e.preventDefault(); setState(false); });
+        };
+
+        bindTouch(btnLeft, (val) => isTouchLeft = val);
+        bindTouch(btnRight, (val) => isTouchRight = val);
+        bindTouch(btnDown, (val) => isTouchDown = val);
+
+        if (btnJump) {
+            btnJump.addEventListener("touchstart", (e) => {
+                e.preventDefault();
+                if (!isGamePaused && player.isGrounded()) {
+                    player.jump(JUMP_FORCE);
+                    player.play(player.isBig() ? "big-jump" : "jump");
+                    play("jump", { volume: 0.8 });
+                }
+            });
+            btnJump.addEventListener("touchend", (e) => {
+                e.preventDefault();
+                if (player.vel && player.vel.y < 0) {
+                    player.vel.y *= 0.5;
+                }
+            });
+            btnJump.addEventListener("touchcancel", (e) => {
+                e.preventDefault();
+                if (player.vel && player.vel.y < 0) {
+                    player.vel.y *= 0.5;
+                }
+            });
+        }
+
+        // Mobile Controls Update Loop
+        onUpdate(() => {
+            if (isGamePaused) return;
+
+            if (isTouchLeft) {
+                player.move(-SPEED, 0);
+                player.flipX = true;
+                if (!isTouchDown && !isKeyDown("down") && !isKeyDown("s")) {
+                    const anim = player.isBig() ? "big-walk" : "walk";
+                    if (player.isGrounded() && player.curAnim() !== anim) player.play(anim);
+                }
+            } else if (isTouchRight) {
+                player.move(SPEED, 0);
+                player.flipX = false;
+                if (!isTouchDown && !isKeyDown("down") && !isKeyDown("s")) {
+                    const anim = player.isBig() ? "big-walk" : "walk";
+                    if (player.isGrounded() && player.curAnim() !== anim) player.play(anim);
+                }
+            }
+
+            if (isTouchDown) {
+                const anim = player.isBig() ? "big-crouch" : "crouch";
+                if (player.curAnim() !== anim) player.play(anim);
+            }
+
+            if (player.isGrounded() && !isTouchLeft && !isTouchRight && !isTouchDown && !isKeyDown("left") && !isKeyDown("right") && !isKeyDown("down") && !isKeyDown("a") && !isKeyDown("d") && !isKeyDown("s")) {
+                const anim = player.isBig() ? "big-idle" : "idle";
+                if (player.curAnim() !== anim) player.play(anim);
+            }
+        });
 
         // Movement Controls
         onKeyDown("left", () => {
