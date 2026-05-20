@@ -23,8 +23,7 @@ An interactive, fully playable Super Mario Bros themed resume built from scratch
 ---
 
 ## 🎮 Play the Game
-*(Add your GitHub Pages or Vercel live link here)*
-**[▶️ Click Here to Play the Interactive Resume](#)**
+**[▶️ Click Here to Play the Interactive Resume](https://vyommodi03.github.io/mario-resume/)**
 
 ---
 
@@ -85,9 +84,6 @@ Want to explore the source code or run the game on your local machine? It's simp
 
 ## 🤝 Let's Connect!
 Did you beat the level? Let's chat about product engineering, web development, or classic games!
-- **LinkedIn:** [Your LinkedIn Profile](#)
-- **Email:** [Your Email Address](#)
-- **Portfolio:** [Your Personal Website](#)
 
 <div align="center">
   <br>
