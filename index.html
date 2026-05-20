@@ -21,12 +21,7 @@
 </head>
 
 <body>
-    <div id="viewport-too-small" class="hidden" role="dialog" aria-live="polite">
-        <div class="viewport-too-small-inner">
-            <p class="viewport-too-small-title">Window too narrow</p>
-            <p class="viewport-too-small-body">This resume game needs a wider view. Please widen your browser window (or rotate your device) until it is at least 768 pixels wide, then continue.</p>
-        </div>
-    </div>
+
 
     <!-- Kaboom Canvas Container -->
     <div id="game-container">
@@ -271,6 +266,14 @@
             </div>
         </div>
 
+        <!-- Pause Modal -->
+        <div id="pause-modal" class="modal hidden">
+            <div class="modal-content glass">
+                <h2>GAME PAUSED</h2>
+                <p>You switched tabs or lost focus.</p>
+                <button id="resume-game-btn" class="btn primary">CLICK TO RESUME</button>
+            </div>
+        </div>
     </div>
 
     <!-- Start the game -->

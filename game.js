@@ -1,24 +1,6 @@
 import kaboom from "kaboom";
 
-const MIN_VIEWPORT_WIDTH = 768;
-let viewportBlockedGlobal = false;
-
-function applyViewportSizing() {
-    viewportBlockedGlobal = window.innerWidth < MIN_VIEWPORT_WIDTH;
-    const overlay = document.getElementById("viewport-too-small");
-    const gc = document.getElementById("game-container");
-    if (!overlay || !gc) return;
-    if (viewportBlockedGlobal) {
-        overlay.classList.remove("hidden");
-        gc.classList.add("canvas-hidden");
-    } else {
-        overlay.classList.add("hidden");
-        gc.classList.remove("canvas-hidden");
-    }
-}
-
-window.addEventListener("resize", applyViewportSizing);
-applyViewportSizing();
+// Removed viewport size checking logic to allow Kaboom's letterbox to handle responsive scaling
 
 // Start Button Logic
 const startBtn = document.getElementById("start-btn");
@@ -43,8 +25,39 @@ function initGame() {
 
     let isGamePaused = false;
 
+    // Focus the canvas to capture keyboard events
+    const canvas = document.getElementById("game-canvas");
+    if (canvas) {
+        canvas.setAttribute("tabindex", "0");
+        canvas.focus();
+    }
+    window.focus();
+
+    // Global click listener to always ensure canvas has focus when clicking anywhere
+    document.addEventListener("click", () => {
+        if (canvas) canvas.focus();
+    });
+
+    const pauseModal = document.getElementById("pause-modal");
+    const resumeBtn = document.getElementById("resume-game-btn");
+
+    const pauseGame = () => {
+        isGamePaused = true;
+        if (pauseModal) pauseModal.classList.remove("hidden");
+    };
+
+    const resumeGame = () => {
+        isGamePaused = false;
+        if (pauseModal) pauseModal.classList.add("hidden");
+        if (canvas) canvas.focus();
+    };
+
+    window.addEventListener("blur", pauseGame);
+    window.addEventListener("focus", resumeGame);
+    if (resumeBtn) resumeBtn.addEventListener("click", resumeGame);
+
     onUpdate(() => {
-        debug.paused = isGamePaused || viewportBlockedGlobal;
+        debug.paused = isGamePaused;
     });
 
     // Fix AudioContext autoplay policy (redundant but safe)
@@ -206,6 +219,7 @@ function initGame() {
         }
 
         const restartGame = () => {
+            retryBtn.removeEventListener("click", restartGame);
             if (gameOverModal) {
                 gameOverModal.classList.add("hidden");
                 gameOverModal.style.display = "none";
@@ -221,6 +235,10 @@ function initGame() {
 
 
     scene("game", () => {
+        const canvas = document.getElementById("game-canvas");
+        if (canvas) canvas.focus();
+        window.focus();
+
         setGravity(2400);
 
         // Spawn Clouds Procedurally
@@ -277,6 +295,15 @@ function initGame() {
             if (!isGamePaused) {
                 b.move(-100, Math.sin(time() * 10) * 50);
             }
+            if (b.pos.x < camPos().x - width() - 200) {
+                destroy(b);
+            }
+        });
+
+        onUpdate("cloud", (c) => {
+            if (c.pos.x < camPos().x - width() - 200) {
+                destroy(c);
+            }
         });
 
         function addScore(amount) {
@@ -317,7 +344,7 @@ function initGame() {
                 "4": () => [sprite("steel"), outline(4, rgb(0, 0, 0)), area({ scale: 1.0 }), body({ isStatic: true }), "info_block", { poleId: "4", bumped: false }],
                 "@": () => [sprite("portal"), area(), body({ isStatic: true }), "portal"],
                 "E": () => [sprite("ghosty"), area(), body(), "enemy", { dir: -1 }],
-                "^": () => [sprite("spike"), area(), body({ isStatic: true }), "hazard"],
+                "^": () => [sprite("spike"), area({ scale: vec2(0.6, 0.5) }), body({ isStatic: true }), "hazard"],
             }
         };
 
@@ -339,7 +366,7 @@ function initGame() {
         const player = add([
             sprite("bean"),
             pos(width() * (100 / GAME_LOGIC_WIDTH), height() * (300 / GAME_LOGIC_HEIGHT)),
-            area({ scale: vec2(0.4, 1.0) }), // Full height to prevent sinking, narrow width for gaps
+            area({ scale: vec2(0.5, 0.9) }), // Reverting to original hitbox scaling
             body(),
             anchor("bot"), // Pivot from the feet
             scale(3.0),
@@ -374,7 +401,7 @@ function initGame() {
             }
 
             // Bottomless Pit Hazard
-            if (player.pos.y > height() + 200) {
+            if (player.pos.y > GAME_LOGIC_HEIGHT + 200) {
                 go("lose", score);
             }
         });
@@ -532,6 +559,9 @@ function initGame() {
             if (!isGamePaused) {
                 e.move(ENEMY_SPEED * e.dir, 0);
             }
+            if (e.pos.y > height() + 300) {
+                destroy(e);
+            }
         });
         onCollide("enemy", "ground", (e, g, col) => {
             if (col && (col.isLeft() || col.isRight())) e.dir = -e.dir;
@@ -608,6 +638,9 @@ function initGame() {
         // Mushroom logic
         onUpdate("mushroom", (m) => {
             if (!isGamePaused) m.move(150 * m.dir, 0);
+            if (m.pos.y > height() + 300) {
+                destroy(m);
+            }
         });
         onCollide("mushroom", "ground", (m, g, col) => {
             if (col && (col.isLeft() || col.isRight())) m.dir = -m.dir;

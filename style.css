@@ -14,47 +14,6 @@ html {
     /* Fallback if canvas doesn't cover */
 }
 
-/* Minimum viewport gate */
-#viewport-too-small {
-    position: fixed;
-    inset: 0;
-    z-index: 35000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    background: rgba(0, 0, 0, 0.94);
-    text-align: center;
-}
-
-#viewport-too-small.hidden {
-    display: none !important;
-}
-
-.viewport-too-small-inner {
-    max-width: 520px;
-}
-
-.viewport-too-small-title {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 14px;
-    line-height: 1.6;
-    color: #f8d828;
-    text-shadow: 3px 3px 0 #000;
-    margin-bottom: 20px;
-}
-
-.viewport-too-small-body {
-    font-family: 'VT323', monospace;
-    font-size: 1.35rem;
-    line-height: 1.45;
-    color: #fff;
-    text-shadow: 2px 2px 0 #000;
-}
-
-#game-container.canvas-hidden {
-    visibility: hidden;
-}
 
 /* Canvas container */
 #game-container {
@@ -697,9 +656,10 @@ canvas {
     z-index: 10005;
 }
 
-/* Hides the Header and Scorecard when the modal is NOT hidden */
-.modal:not(.hidden)~#game-header,
-.modal:not(.hidden)~#score-card {
+/* Hides the Header, Scorecard, and Progress Bar when any modal is active */
+#ui-layer:has(.modal:not(.hidden)) #game-header-container,
+#ui-layer:has(.modal:not(.hidden)) #score-card,
+#ui-layer:has(.modal:not(.hidden)) #game-progress-container {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s ease;
@@ -708,6 +668,8 @@ canvas {
 .modal.hidden {
     opacity: 0;
     pointer-events: none;
+    visibility: hidden;
+    backdrop-filter: none;
 }
 
 /* Retro Dialogue Box Effect */
